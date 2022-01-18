@@ -103,14 +103,15 @@ const addNote = async (req,res,next)=>{
     try{
         const ifUserExist = await collection.exists({_id:userId})
         if(ifUserExist){
-            let {title,content,light,dark} = req.body
+            let {title,content,light,dark,userId} = req.body
             let note = noteCollection.create({
                 title,
                 content,
                 color:{
                     light,
                     dark
-                }
+                },
+                owner: userId
             }) 
             let result = await note.save()
             res.status(200).json({status:'success',user:result})
