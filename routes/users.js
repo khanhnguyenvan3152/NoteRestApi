@@ -5,7 +5,9 @@ var userController = require('../controllers/userController')
 
 router.get('/:id/verify',userController.verifyUser)
 router.get('/', userController.list);
-
+router.get('/:id/notes',userController.getListNote)
 router.post('/', userController.addUser)
+router.post('/:id/notes',userController.addNote)
+router.patch('/',userController.changePassword)
 
 module.exports = router;

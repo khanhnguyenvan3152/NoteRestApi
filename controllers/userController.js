@@ -1,7 +1,9 @@
 const collection = require('../models/users')
+const noteCollection = require('../models/notes')
 const bcrypt = require('bcrypt')
 const salt = 12
-const mailer = require('../mailer')
+const mailer = require('../mailer');
+const notes = require('../models/notes');
 //Utils
 function makeVerifyCode(length) {
     var result = '';
@@ -25,9 +27,13 @@ const addUser = async function (req, res, next) {
     try {
         let hashedPassword = await bcrypt.hash(password, salt)
         let isUsernameExist = await collection.exists({ username: username })
+        let isEmailExist = await collection.exists({email: email})
         if(isUsernameExist == true){
-            res.status(400).json({status:'error', message:'Username is used'})
+            res.status(400).json({status:'error', message:'Username is already in used'})
             return;
+        }
+        if(isEmailExist == true){
+            res.status(400).json({status:'error',message:'Email is already in use'})
         }
         let user = await collection.create({
             username: username,
@@ -71,5 +77,80 @@ const verifyUser = async function (req, res, next) {
 
 }
 
+const changePassword = async function(req,res,next){
+    try{
+        let userId = req.params.id;
+        let {currentPassword,newPassword} = req.body;
+        const user = await collection.findById(userId)
+        let isValidated = await bcrypt.compare(currentPassword,newPassword);
+        if(isValidated){
+            let newHashedPassword = await bcrypt.hash(newPassword,salt)
+            user.password = newHashedPassword
+            let result = await user.save()
+            res.status(200).json({staus:'success',result:result})
+        }
+        else{
+            res.status(400).json({status:'fail',message:'Current password does not match'})
+        }
+        
+    }catch(err){
+        res.status(400).json({status:'error',message:'Something gone wrong!'})
+    }
+}
 
-module.exports = { list, addUser, getUser, verifyUser }
+const addNote = async (req,res,next)=>{
+    const userId = req.params.id
+    try{
+        const ifUserExist = await collection.exists({_id:userId})
+        if(ifUserExist){
+            let {title,content,light,dark} = req.body
+            let note = noteCollection.create({
+                title,
+                content,
+                color:{
+                    light,
+                    dark
+                }
+            }) 
+            let result = await note.save()
+            res.status(200).json({status:'success',user:result})
+        }
+        else{
+            res.status(406).json({status:'error',message:'User does not exist'})
+        }
+    }catch(err){
+        console.log(err)
+        res.status(500).json({status:'error',message:'Server error'})
+    }
+}
+
+const getListNoteIdsFromUser = async (req,res,next)=>{
+    const userId = req.params.id
+    try{
+        const notes = await collections.find({_id:userId},'notes')
+        res.status(200).json({status:'success',result:{_id:userId,notes}})
+    }catch(err){
+        res.status(400).json({status:'error',message:'error'})
+    }
+}
+
+const getListNote = async (req,res,next)=>{
+    const userId = req.params.id
+    try{
+        let isUserExist = await collection.exists({'_id':userId})
+        if(isUserExist){
+            const notes = await collection.findById(userId).populate('notes')         
+            res.status(200).json({success:true,notes})   
+        }        
+    }catch(err){
+
+    }
+
+}
+
+const deleteUser = async function(req,res,next){
+
+
+}
+
+module.exports = { list, addUser, getUser, verifyUser,changePassword,getListNoteIdsFromUser,getListNote,addNote }
