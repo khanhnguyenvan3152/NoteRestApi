@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/themify-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.js"
+    integrity="sha512-II/TvxJGs27N3NEu/WWRFtyhBdSByZwS5ovX1vHXVsi2JXj0I5hRvHwgBPKbzZDk0wsKVDoEUEI8rAYGEF394A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar">
+        <button id="btnAdd">
+            <span class="ti-plus"></span>
+            ADD
+        </button>
+        <div class="navbar_user">
+            <span class="ti-user"></span>
+            <div class="navbar_user__dropdown">
+                <ul>
+                   <li>
+                       <a href="/logout">Logout</a>    
+                   </li> 
+                </ul>
+            </div>  
+        </div>
+     
+    </div>
+    <div class="work-space">
+        <!-- <div id="1" class="note">
+            <div id="1_header" class="note_header">
+                <div  class="note_title">
+                    <h3 contenteditable="">NOTE_TITLE</h3>
+                </div>
+                <div id="1_menu" class="note_menu">
+                    <span class="ti-menu"></span>
+                </div>
+            </div>
+            <div class="note_body" aria-multiline="true" contenteditable="">
+
+            </div>
+            <div class="note_footer">
+                <div class="note_footer_tools">
+                    <button class="btnBold"><span class="ti-bold">B</span></button>
+                    <button class="btnUnderline"><span class="ti-underline"></span></button>
+                    <button class="btnItalic"><span class="ti-Italic"></span></button>
+                    <button id="btnColorPalette" class="btnColorPalette">
+                        <span class="ti-palette">
+                        </span>
+                        <div id="colorPalette" class="colorPalette">
+                            <label class="container">
+                                <input class="radio-color" name="color" light="#E5D4F1" value="#C4C4C4" type="radio" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <input class="radio-color" name="color" light="#4098FF" value="#0B7BFF" type="radio" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <input class="radio-color" name="color" light="#ffd359" value="#fcba03" type="radio" />
+                                <span class="checkmark"></span>
+                            </label>                            
+                            <label class="container">
+                                <input class="radio-color" name="color" light="#52fa8a" value="#00ff55" type="radio" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="note_footer_checkmark hidden">
+                    <span class="ti-check"></span>
+                </div>
+                <div class="note_footer_checkmark spinner hidden">
+                    <img src="/images/Loader.gif" width="70px" alt="">
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>

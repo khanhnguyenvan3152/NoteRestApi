@@ -1,9 +1,10 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api')
@@ -11,9 +12,21 @@ var apiRouter = require('./routes/api')
 var db = require('./db')
 db.connect()
 
+var corsOptions ={
+  origin: ['http://127.0.0.1:5500','http://localhost:5000'],
+  credentials: true,
+}
 
 var app = express();
-
+app.use(cors(corsOptions))
+app.use(function(req,res,next){
+  var origin = req.headers.origin;
+  res.setHeader('Referrer-Policy', 'origin-when-cross-origin');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  next()
+})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

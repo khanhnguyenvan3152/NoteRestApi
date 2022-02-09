@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const connectionString = `mongodb+srv://khanh:khanh123@cluster0.ubndu.mongodb.net/notedb`
+const connectionString =  process.env.DB_CONNECTIONSTRING
 
 const connect = function(){
     mongoose.connect(connectionString,{

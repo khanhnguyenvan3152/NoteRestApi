@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gudea&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.js"
+    integrity="sha512-II/TvxJGs27N3NEu/WWRFtyhBdSByZwS5ovX1vHXVsi2JXj0I5hRvHwgBPKbzZDk0wsKVDoEUEI8rAYGEF394A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="/stylesheets/themify-icons.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="wrapper">
+            <div class="login-form">
+                <h1>NOTE</h1>
+                <div class="menu">
+                    <a href="/login.html" id="menu_login">LOGIN</a>
+                    <a href="/register.html" id="menu_register">REGISTER</a>
+                </div>
+                <form  id="form_login">
+                    <div class="form-controll">
+                        <div class="login-form_email">
+                            <div class="login-form_email__icon">
+                                <span class="ti-email"></span>
+                            </div>
+                            <input type="text" name="email" placeholder="Email" value="" />
+                        </div>
+                        <small>Validation message</small>
+                    </div>
+                    <div class="form-controll">
+                        <div class="login-form_password">
+                            <div class="login-form_password__icon">
+                                <span class="ti-key"></span>
+                            </div>
+                            <input type="password" name="password" placeholder="Password" value="" />
+                            <div class="login-form_password__unhide">
+                                <div class="strike hidden"></div>
+                                <span class="ti-eye"></span>
+                            </div>
+                        </div>
+                        <small>Validation message</small>
+                    </div>
+                    <div class="login-form_rememberme">
+                        <input id="rememberme" type="checkbox" name="rememberme" value=""/>
+                        <label for="rememberme">Remember me</label>
+                    </div>
+                    <div class="login-form_submit">
+                        <button id="submit">LOGIN</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/javascripts/script.js"></script>
+<script src="/javascripts/login.js"></script>
+</html>

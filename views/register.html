@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gudea&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="themify-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.js"
+        integrity="sha512-II/TvxJGs27N3NEu/WWRFtyhBdSByZwS5ovX1vHXVsi2JXj0I5hRvHwgBPKbzZDk0wsKVDoEUEI8rAYGEF394A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="wrapper">
+            <div class="login-form">
+                <h1>NOTE</h1>
+                <form id="form_register">
+                    <div class="form-controll">
+                        <div class="login-form_username">
+                            <div class="login-form_user__icon">
+                                <span class="ti-user"></span>
+                            </div>
+                            <input type="text" name="username" placeholder="Username" value="" />
+                        </div>
+                        <small>Validation message</small>
+                    </div>
+                    <div class="form-controll">
+                        <div class="login-form_email">
+                            <div class="login-form_email__icon">
+                                <span class="ti-email"></span>
+                            </div>
+                            <input type="text" name="email" placeholder="Email" value="" />
+                        </div>
+                        <small>Validation message</small>
+
+                    </div>
+                    <div class="form-controll">
+                        <div class="login-form_password">
+                            <div class="login-form_password__icon">
+                                <span class="ti-key"></span>
+                            </div>
+                            <input type="password" name="password" placeholder="Password" value="" />
+                        </div>
+                        <small>Validation message</small>
+
+                    </div>
+                    <div class="form-controll">
+                        <div class="login-form_retype_password">
+                            <div class="login-form_password__icon">
+                                <span class="ti-key"></span>
+                            </div>
+                            <input type="password" name="retypepassword" placeholder="Retype Password" value="" />
+                        </div>
+                        <small>Validation message</small>
+                    </div>
+                    <div class="login-form_submit">
+                        <button type="submit" id="submit">REGISTER</button>
+                    </div>
+                </form>
+                <div class="login_link">
+                    Already have an account?
+                    <a href="/login.html">Login</a>.
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/script.js"></script>
+<script src="./register.js"></script>
+
+</html>
