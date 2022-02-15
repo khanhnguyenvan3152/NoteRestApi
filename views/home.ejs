@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,24 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/themify-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.js"
-    integrity="sha512-II/TvxJGs27N3NEu/WWRFtyhBdSByZwS5ovX1vHXVsi2JXj0I5hRvHwgBPKbzZDk0wsKVDoEUEI8rAYGEF394A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-II/TvxJGs27N3NEu/WWRFtyhBdSByZwS5ovX1vHXVsi2JXj0I5hRvHwgBPKbzZDk0wsKVDoEUEI8rAYGEF394A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,700;1,200&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
     <title>Document</title>
 </head>
+<style>
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
+
 <body>
     <div class="navbar">
         <button id="btnAdd">
@@ -22,16 +36,17 @@
             <span class="ti-user"></span>
             <div class="navbar_user__dropdown">
                 <ul>
-                   <li>
-                       <a href="/logout">Logout</a>    
-                   </li> 
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
                 </ul>
-            </div>  
+            </div>
         </div>
-     
+
     </div>
-    <div class="work-space">
-        <!-- <div id="1" class="note">
+    <div class="main">
+        <div class="work-space">
+            <!-- <div id="1" class="note">
             <div id="1_header" class="note_header">
                 <div  class="note_title">
                     <h3 contenteditable="">NOTE_TITLE</h3>
@@ -74,6 +89,7 @@
                             </label>
                         </div>
                     </button>
+                    <button class="btnItalic"><span class="ti-trash"></span></button>
                 </div>
                 
                 <div class="note_footer_checkmark hidden">
@@ -84,7 +100,20 @@
                 </div>
             </div>
         </div> -->
+        </div>
     </div>
     <script src="/javascripts/script.js"></script>
+    <script>
+        let buttonAdd = document.querySelector('#btnAdd')
+        const socket = io();
+        socket.on('connect', () => {
+            console.log("connected");
+
+            buttonAdd.addEventListener('click', function () {
+                socket.emit('savenote', { title: "lmao" })
+            })
+        })
+    </script>
 </body>
+
 </html>

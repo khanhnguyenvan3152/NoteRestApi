@@ -27,13 +27,13 @@ const addUser = async function (req, res, next) {
     try {
         let hashedPassword = await bcrypt.hash(password, salt)
         let isUsernameExist = await collection.exists({ username: username })
-        let isEmailExist = await collection.exists({email: email})
-        if(isUsernameExist == true){
-            res.status(400).json({status:'error', message:'Username is already in used'})
+        let isEmailExist = await collection.exists({ email: email })
+        if (isUsernameExist == true) {
+            res.status(400).json({ status: 'error', message: 'Username is already in used' })
             return;
         }
-        if(isEmailExist == true){
-            res.status(400).json({status:'error',message:'Email is already in use'})
+        if (isEmailExist == true) {
+            res.status(400).json({ status: 'error', message: 'Email is already in use' })
         }
         let user = await collection.create({
             username: username,
@@ -77,81 +77,79 @@ const verifyUser = async function (req, res, next) {
 
 }
 
-const changePassword = async function(req,res,next){
-    try{
+const changePassword = async function (req, res, next) {
+    try {
         let userId = req.params.id;
-        let {currentPassword,newPassword} = req.body;
+        let { currentPassword, newPassword } = req.body;
         const user = await collection.findById(userId)
-        let isValidated = await bcrypt.compare(currentPassword,newPassword);
-        if(isValidated){
-            let newHashedPassword = await bcrypt.hash(newPassword,salt)
+        let isValidated = await bcrypt.compare(currentPassword, newPassword);
+        if (isValidated) {
+            let newHashedPassword = await bcrypt.hash(newPassword, salt)
             user.password = newHashedPassword
             let result = await user.save()
-            res.status(200).json({staus:'success',result:result})
+            res.status(200).json({ staus: 'success', result: result })
         }
-        else{
-            res.status(400).json({status:'fail',message:'Current password does not match'})
+        else {
+            res.status(400).json({ status: 'fail', message: 'Current password does not match' })
         }
-        
-    }catch(err){
-        res.status(400).json({status:'error',message:'Something gone wrong!'})
+
+    } catch (err) {
+        res.status(400).json({ status: 'error', message: 'Something gone wrong!' })
     }
 }
 
-const addNote = async (req,res,next)=>{
+const addNote = async function (req, res, next) {
+        var userId = req.params.id
+        console.log(userId)
+        collection.exists({ _id: userId }).then(async (result) => {
+            if (result == true) {
+                const user = await collection.findById(req.params.id)
+                let { title, content, light, dark, userId } = req.body
+                let note = await noteCollection.create({
+                    title,
+                    content,
+                    color: {
+                        light,
+                        dark
+                    },
+                    owner: userId
+                })
+                user.notes.push(note._id)
+                await user.save();
+                return res.status(200).json({ status: 'success', note })
+            }else{
+               return res.status(406).json({ status: 'error', message: 'User does not exist' })
+            }
+        })
+}
+
+const getListNoteIdsFromUser = async (req, res, next) => {
     const userId = req.params.id
-    try{
-        const ifUserExist = await collection.exists({_id:userId})
-        if(ifUserExist){
-            let {title,content,light,dark,userId} = req.body
-            let note = noteCollection.create({
-                title,
-                content,
-                color:{
-                    light,
-                    dark
-                },
-                owner: userId
-            }) 
-            let result = await note.save()
-            res.status(200).json({status:'success',user:result})
-        }
-        else{
-            res.status(406).json({status:'error',message:'User does not exist'})
-        }
-    }catch(err){
-        console.log(err)
-        res.status(500).json({status:'error',message:'Server error'})
+    try {
+        const notes = await collections.find({ _id: userId }, 'notes')
+        res.status(200).json({ status: 'success', result: { _id: userId, notes } })
+    } catch (err) {
+        res.status(400).json({ status: 'error', message: 'error' })
     }
 }
 
-const getListNoteIdsFromUser = async (req,res,next)=>{
+const getListNote = async (req, res, next) => {
     const userId = req.params.id
-    try{
-        const notes = await collections.find({_id:userId},'notes')
-        res.status(200).json({status:'success',result:{_id:userId,notes}})
-    }catch(err){
-        res.status(400).json({status:'error',message:'error'})
-    }
-}
-
-const getListNote = async (req,res,next)=>{
-    const userId = req.params.id
-    try{
-        let isUserExist = await collection.exists({'_id':userId})
-        if(isUserExist){
-            const notes = await collection.findById(userId).populate('notes')         
-            res.status(200).json({success:true,notes})   
-        }        
-    }catch(err){
+    try {
+        let isUserExist = await collection.exists({ '_id': userId })
+        if (isUserExist) {
+            const result = await collection.findById(userId).populate('notes')
+            res.status(200).json({ success: true, notes: result.notes })
+        }
+    } catch (err) {
 
     }
 
 }
 
-const deleteUser = async function(req,res,next){
+const deleteUser = async function (req, res, next) {
 
 
 }
 
-module.exports = { list, addUser, getUser, verifyUser,changePassword,getListNoteIdsFromUser,getListNote,addNote }
+module.exports = { list, addUser, getUser, verifyUser, changePassword, getListNoteIdsFromUser, getListNote, addNote }

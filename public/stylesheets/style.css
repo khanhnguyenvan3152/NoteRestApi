@@ -1,72 +1,80 @@
-:root{
+:root {
     --success-color: #00dc00;
     --error-color: #ff2300
-
 }
-*{
-    margin:0;
-    padding:0;
+
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Gudea', sans-serif;
 }
-body{
+
+body {
     width: 100%;
     height: 100vh;
+    background-color: #F9F7F7;
 }
-.main{
+
+.main {
     width: 100%;
     height: 100%;
 }
-.wrapper{
+
+.wrapper {
     width: 100%;
-    margin:auto;
+    margin: auto;
     padding-top: 20vh;
     position: relative;
 }
-.login-form{
+
+.login-form {
     width: 300px;
-    margin:auto;
+    margin: auto;
     border: 1px solid #E9E9E9;
     border-radius: 10px;
-    box-shadow: -10px 12px 10px -12px rgba(0,0,0,40%);
+    box-shadow: -10px 12px 10px -12px rgba(0, 0, 0, 40%);
     background-color: #F5F4F4;
 }
 
-h1{
+h1 {
     text-align: center;
     padding: 20px;
 }
 
-input{
+input {
     width: 100%;
-    padding:15px 10px;
+    padding: 15px 10px;
     height: 2rem;
     outline-width: 0px;
     border-width: 0;
 }
 
-input::cue-region{
-    padding:15px;
+input::cue-region {
+    padding: 15px;
 }
-input:focus{
+
+input:focus {
     outline-color: #389;
 }
-button{
+
+button {
     width: 100%;
     height: 2.5rem;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.menu{
+.menu {
     display: flex;
     flex-direction: row;
-    padding:15px;
+    padding: 15px;
     height: 100%;
 }
-.menu a{
+
+.menu a {
     padding: 15px;
     text-decoration: none;
     color: #000;
@@ -75,263 +83,284 @@ button{
     border-width: 0;
     background-color: #fff;
 }
-.menu a:hover{
+
+.menu a:hover {
     border: 1px solid #aaa;
 }
-#menu_login{
-    border-right:1px solid #000;
+
+#menu_login {
+    border-right: 1px solid #000;
 }
 
-#menu_register{
+#menu_register {
     border-left: 1px solid #000;
 }
-form{
-    padding:15px;
+
+form {
+    padding: 15px;
 }
-.form-controll{
+
+.form-controll {
     min-height: max-content;
     margin-bottom: 10px;
     width: 100%;
 }
 
-.form-controll small{
+.form-controll small {
     height: 1em;
     visibility: hidden;
 }
-.login-form_email{
+
+.login-form_email {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.login-form_email__icon{
+.login-form_email__icon {
     padding: 6px 7px 0px 7px;
     border: 1px solid white;
     background-color: white;
-    border-right:1px solid #bbb;
+    border-right: 1px solid #bbb;
 }
-.login-form_password{
+
+.login-form_password {
     width: 100%;
     display: flex;
     flex-direction: row;
     position: relative;
 }
 
-.login-form_password__icon{
+.login-form_password__icon {
     padding: 6px 7px 0px 7px;
     border: 1px solid white;
     background-color: white;
-    border-right:1px solid #bbb;
+    border-right: 1px solid #bbb;
 }
 
-.login-form_password__unhide{
+.login-form_password__unhide {
     padding: 7px 7px 0px 7px;
     position: absolute;
     right: 5px;
-    top:0px;
+    top: 0px;
     overflow: visible;
 }
 
-.strike{
+.strike {
     border-left: 1px solid #000;
     width: 100%;
     height: 20px;
     position: absolute;
     top: -5px;
-    left:9px;
+    left: 9px;
     transform: rotate(-50deg);
 }
-.login-form_retype_password{
+
+.login-form_retype_password {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
 
-.login-form_username{
+.login-form_username {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.login-form_user__icon{
+.login-form_user__icon {
     padding: 6px 7px 0px 7px;
     border: 1px solid white;
     background-color: white;
-    border-right:1px solid #bbb;
+    border-right: 1px solid #bbb;
 }
 
-.login-form_rememberme{
-    padding:0px 15px 0px 15px;
+.login-form_rememberme {
+    padding: 0px 15px 0px 15px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 }
 
-.login-form_rememberme input    {
+.login-form_rememberme input {
     width: 12px;
 }
 
-.login-form_rememberme label{
+.login-form_rememberme label {
     padding-left: 5px;
     font-size: 0.9em;
 }
 
-.login-form_submit{
+.login-form_submit {
     bottom: 0;
     width: 100%;
     height: auto;
 }
 
-.login-form_submit button{
+.login-form_submit button {
     background-color: #403D3A;
     color: white;
 }
 
-.navbar{
+.navbar {
     height: 56px;
     width: 100%;
-    background-color: #3D3D3D;
+    border-bottom: 1px solid rgb(219, 226, 239);
+    background-color: #3F72AF;
+    color: white;
 }
 
-.navbar button{
+.navbar button {
     width: 80px;
-    background-color: #44BE26 ;
-    color: white;
     margin: 7px;
     border-width: 0px;
-    font-weight: bold;
-}
-
-.navbar button{
-    width: 80px;
-    background-color: #44BE26 ;
-    color: white;
-    margin: 7px;
-    border-width: 0px;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 15px;
+    background-color: #112D4E;
+    border-radius: 5px;
+    color: white;
 }
 
-.navbar_user{
+.navbar_user {
     position: relative;
     float: right;
-    right:50px;
-    top:15px;
+    right: 50px;
+    top: 15px;
     height: inherit;
 }
 
-.navbar_user:hover .navbar_user__dropdown{
+.navbar_user:hover .navbar_user__dropdown {
     display: block;
     position: fixed;
-    top:56px;
-    float:left;
+    top: 53px;
+    float: left;
 }
 
-.navbar_user__dropdown{
-    background-color:white;
-    width: 150px;
-    margin-left:-70px;
-    padding: 5px 5px 5px 0px;
-    background-color:white;
+.navbar_user__dropdown {
+    position: relative;
+    right: 0;
+    background-color: white;
+    width: 130px;
+    margin-left: -70px;
+    background-color: white;
     border-radius: 2px;
-    border: 1px solid #3D3D3D;
-    box-shadow: 0 0 2px rgba(0,0,0,40%)
+    border: 1px solid #112D4E;
+    box-shadow: 0 0 2px rgb(17, 45, 78)
 }
 
-.navbar_user__dropdown li{
+.navbar_user__dropdown li {
     list-style-type: none;
-    padding-left: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    display: flex;
+    justify-content: center;
     line-height: 1.5em;
 }
-.navbar_user__dropdown li:hover{
-    background-color: rgba(0,0,0,10%);
+
+.navbar_user__dropdown li:hover {
+    background-color: rgba(0, 0, 0, 10%);
 }
 
-.navbar_user__dropdown a{
+.navbar_user__dropdown a {
     text-decoration: none;
     color: #000;
     justify-content: center;
 }
 
-.ti-user::content{
-}
-.navbar_user__dropdown{
+.ti-user::content {}
+
+.navbar_user__dropdown {
     display: none;
 }
-.ti-plus{
-    color:white;
+
+.ti-plus {
+    color: white;
     font-weight: bold;
 }
 
-
-.work-space{
-    width: 100%;
-    padding: 10px;
+.main {
+    width:100%;
+    height: max-content;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    
+    justify-content: center;
+    justify-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
 }
-.note{
+
+.work-space {
+    display: grid;
+}
+
+.note {
     width: 300px;
-    background-color:#C4C4C4;
-    box-shadow: 0 4px 4px 1px rgba(0,0,0,20%);
-    position: absolute;
+    background-color: #C4C4C4;
+    box-shadow: 0 4px 4px 1px rgba(0, 0, 0, 20%);
+    margin: 12px;
 }
-.note_title, .note_body, .note_footer{
+
+.note_title, .note_body, .note_footer {
     padding-left: 5px;
 }
-.note_header{
+
+.note_header {
     width: 100%;
     display: flex;
     align-items: center;
     flex-flow: nowrap;
     background-color: #D8D4D4;
 }
-.note_title h3{
+
+.note_title h3 {
     padding: 5px;
     width: 270px;
 }
-.note_menu{
-}
-.note_body{
+
+.note_menu {}
+
+.note_body {
     width: 100%;
     height: 250px;
 }
-.ti-bold{
+
+.ti-bold {
     font-size: 19px;
     font-weight: 1000;
 }
-.ti-menu{
-    
-}
-.note_footer{
+
+.ti-menu {}
+
+.note_footer {
     height: 2em;
     flex-direction: row;
     display: flex;
     background-color: #D8D4D4;
     align-items: center;
 }
-.note_footer_tools{
+
+.note_footer_tools {
     width: 269px;
     height: 100%;
 }
-.note_footer_checkmark{
-    top:15px;
+
+.note_footer_checkmark {
+    top: 15px;
 }
-.note_footer button{
+
+.note_footer button {
     width: 30px;
     height: 30px;
     border: 0;
     background-color: transparent;
 }
 
-.btnColorPalette{
+.btnColorPalette {
     border-radius: 100%;
 }
-.colorPalette{
+
+.colorPalette {
     position: relative;
     visibility: hidden;
     width: max-content;
@@ -342,11 +371,12 @@ form{
     border-radius: 5px;
     /* display: none; */
 }
-.btnColorPalette:hover .colorPalette{
+
+.btnColorPalette:hover .colorPalette {
     visibility: inherit;
 }
 
-.colorPalette input{
+.colorPalette input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -354,23 +384,26 @@ form{
 
     border: 1px solid black;
 }
-.radio-color{
+
+.radio-color {
     height: 25px;
     width: 25px;
     background-color: #ee0e;
 }
+
 /* .radio-color:checked + span{
     background-color: #C3C3C3;
 } */
-.container{
-    top:5px;
+.container {
+    top: 5px;
     position: relative;
     padding-left: 30px;
     margin-bottom: 12px;
     cursor: pointer;
-      font-size: 22px;
+    font-size: 22px;
 }
-.checkmark{
+
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -379,14 +412,16 @@ form{
     background-color: #eee;
     border-radius: 50%;
 }
-.container:hover input ~ .checkmark{
+
+.container:hover input~.checkmark {
     transform: scale(1.3);
 }
+
 /* input[name="color"]:checked + span{
    background-color: #C3C3C3;
 } */
 
-.login_link{
+.login_link {
     padding: 0 1em 1em 1em;
 }
 
@@ -394,6 +429,30 @@ form{
     color: var(--success-color)
 }
 
-.error{
+.error {
     color: var(--error-color)
 }
+/*Responsive workspace*/
+@media only screen {
+    .work-space{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 1290px) {
+    .work-space{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 950px) {
+    .work-space{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .work-space{
+        grid-template-columns: 1fr;
+    }
+}
+
+

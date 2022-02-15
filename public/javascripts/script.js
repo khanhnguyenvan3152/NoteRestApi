@@ -4,75 +4,12 @@ const getCookie = (name) => {
     return parts[0] === name ? decodeURIComponent(parts[1]) : r
   }, '')
 }
-var notes
 var storage = window.localStorage;
 var userId = JSON.parse(getCookie('user'))._id
+console.log(userId)
+var notes = JSON.parse(storage.getItem('notes')) || []; //note data
+var noteObjects = [];
 
-notes = storage.getItem('notes') || [];
-if (notes.length > 0) {
-  notes.forEach(note => {
-    let noteElement = document.createElement('div')
-    noteElement.setAttribute('id', note.id)
-    noteElement.classList.add('note')
-    noteElement.innerHTML = `
-    <div id="${note.id}_header" class="note_header">
-                <div  class="note_title">
-                    <h3 contenteditable="">NOTE_TITLE</h3>
-                </div>
-                <div id="${note.id}_menu" class="note_menu">
-                    <span class="ti-menu"></span>
-                </div>
-            </div>
-            <div class="note_body" aria-multiline="true" contenteditable="">
-
-            </div>
-            <div class="note_footer">
-                <div class="note_footer_tools">
-                    <button class="btnBold"><span class="ti-bold">B</span></button>
-                    <button class="btnUnderline"><span class="ti-underline"></span></button>
-                    <button class="btnItalic"><span class="ti-Italic"></span></button>
-                    <button id="btnColorPalette" class="btnColorPalette">
-                        <span class="ti-palette">
-                        </span>
-                        <div id="colorPalette" class="colorPalette">
-                            <label class="container">
-                                <input class="radio-color" name="color" light="#E5D4F1" value="#C4C4C4" type="radio" />
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">
-                                <input class="radio-color" name="color" light="#4098FF" value="#0B7BFF" type="radio" />
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">
-                                <input class="radio-color" name="color" light="#ffd359" value="#fcba03" type="radio" />
-                                <span class="checkmark"></span>
-                            </label>                            
-                            <label class="container">
-                                <input class="radio-color" name="color" light="#52fa8a" value="#00ff55" type="radio" />
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">
-                                <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">
-                                <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
-                                <span class="checkmark"></span>
-                            </label>   
-                        </div>
-                    </button>
-                </div>
-                
-                <div class="note_footer_checkmark hidden">
-                    <span class="ti-check"></span>
-                </div>
-                <div class="note_footer_checkmark spinner hidden">
-                    <img src="/Loader.gif" width="70px" alt="">
-                </div>
-            </div>
-    `
-  })
-}
 var unHideElement = document.querySelector('.login-form_password__unhide')
 var isHide = false;
 function handleUnHideClick(e) {
@@ -137,71 +74,74 @@ setBackGroundColor()
 bindRadioOnChangeEvent()
 btnAddElement.onclick = function () {
   index++;
-  let noteElement = document.createElement('div')
-  noteElement.classList.add('note')
-  noteElement.setAttribute('id', index)
-  noteElement.innerHTML = `
-  <div id="${index}_header" class="note_header">
-      <div class="note_title">
-          <h3 contenteditable="">NOTE_TITLE</h3>
-      </div>
-      <div id="${index}_menu" class="note_menu">
-          <span class="ti-menu"></span>
-      </div>
-  </div>
-  <div class="note_body" aria-multiline="true" contenteditable="">
+  let note = new Note(null);
+  //addNoteToList(note)
+  socket.emit('savenote',"note to save")
+  console.log(notes);
+  // let noteElement = document.createElement('div')
+  // noteElement.classList.add('note')
+  // noteElement.setAttribute('id', index)
+  // noteElement.innerHTML = `
+  // <div id="${index}_header" class="note_header">
+  //     <div class="note_title">
+  //         <h3 contenteditable="">NOTE_TITLE</h3>
+  //     </div>
+  //     <div id="${index}_menu" class="note_menu">
+  //         <span class="ti-menu"></span>
+  //     </div>
+  // </div>
+  // <div class="note_body" aria-multiline="true" contenteditable="">
 
-  </div>
-  <div class="note_footer">
-      <div class="note_footer_tools">
-          <button class="btnBold"><span class="ti-bold">B</span></button>
-          <button class="btnUnderline"><span class="ti-underline"></span></button>
-          <button class="btnItalic"><span class="ti-Italic"></span></button>
-          <button id="btnColorPalette" class="btnColorPalette">
-          <span class="ti-palette">
-          </span>
-          <div id="colorPalette" class="colorPalette">
-              <label class="container">
-                  <input class="radio-color" name="color" light="#E5D4F1" value="#C4C4C4" type="radio" />
-                  <span class="checkmark"></span>
-              </label>
-              <label class="container">
-                  <input class="radio-color" name="color" light="#4098FF" value="#0B7BFF" type="radio" />
-                  <span class="checkmark"></span>
-              </label>
-              <label class="container">
-                  <input class="radio-color" name="color" light="#ffd359" value="#fcba03" type="radio" />
-                  <span class="checkmark"></span>
-              </label>                            
-              <label class="container">
-                  <input class="radio-color" name="color" light="#52fa8a" value="#00ff55" type="radio" />
-                  <span class="checkmark"></span>
-              </label>
-              <label class="container">
-                  <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
-                  <span class="checkmark"></span>
-              </label>
-              <label class="container">
-                  <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
-                  <span class="checkmark"></span>
-              </label>   
-          </div>
-      </button>
-      </div>
+  // </div>
+  // <div class="note_footer">
+  //     <div class="note_footer_tools">
+  //         <button class="btnBold"><span class="ti-bold">B</span></button>
+  //         <button class="btnUnderline"><span class="ti-underline"></span></button>
+  //         <button class="btnItalic"><span class="ti-Italic"></span></button>
+  //         <button id="btnColorPalette" class="btnColorPalette">
+  //         <span class="ti-palette">
+  //         </span>
+  //         <div id="colorPalette" class="colorPalette">
+  //             <label class="container">
+  //                 <input class="radio-color" name="color" light="#E5D4F1" value="#C4C4C4" type="radio" />
+  //                 <span class="checkmark"></span>
+  //             </label>
+  //             <label class="container">
+  //                 <input class="radio-color" name="color" light="#4098FF" value="#0B7BFF" type="radio" />
+  //                 <span class="checkmark"></span>
+  //             </label>
+  //             <label class="container">
+  //                 <input class="radio-color" name="color" light="#ffd359" value="#fcba03" type="radio" />
+  //                 <span class="checkmark"></span>
+  //             </label>                            
+  //             <label class="container">
+  //                 <input class="radio-color" name="color" light="#52fa8a" value="#00ff55" type="radio" />
+  //                 <span class="checkmark"></span>
+  //             </label>
+  //             <label class="container">
+  //                 <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
+  //                 <span class="checkmark"></span>
+  //             </label>
+  //             <label class="container">
+  //                 <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
+  //                 <span class="checkmark"></span>
+  //             </label>   
+  //         </div>
+  //     </button>
+  //     </div>
       
-      <div class="note_footer_checkmark hidden">
-          <span class="ti-check"></span>
-      </div>
-      <div class="note_footer_checkmark spinner hidden">
-      <img src="/Loader.gif" width="70px" alt="">
-  </div>
-  </div>
-  `
-
+  //     <div class="note_footer_checkmark hidden">
+  //         <span class="ti-check"></span>
+  //     </div>
+  //     <div class="note_footer_checkmark spinner hidden">
+  //     <img src="/Loader.gif" width="70px" alt="">
+  // </div>
+  // </div>
+  // `
+  let noteElement = note.getHTMLElement()
   document.querySelector('.work-space').append(noteElement)
   bindRadioOnChangeEvent()
   setBackGroundColor()
-  dragElement(noteElement)
 }
 
 // Make the DIV element draggable:
@@ -293,14 +233,18 @@ function handleUserInputEvent() {
   }
 }
 
-const Note = function (id, title, content, color, positionX, positionY) {
-  this.id = id
-  this.title = title
-  this.content = content
-  this.positionX = positionX
-  this.positionY = positionY
+const Note = function (id, title="Title", content="", color="#C4C4C4") {
+  this.id = id;
+  this.title = title;
+  this.content = content;
+  this.color = color;
+  
+ 
+}
+Note.prototype.changeColor = function(color){
   this.color = color
-  function getHTMLElement() {
+}
+Note.prototype.getHTMLElement = function(){
     let elem = document.createElement('div')
     elem.setAttribute('id', this.id)
     elem.classList.add('note')
@@ -345,12 +289,10 @@ const Note = function (id, title, content, color, positionX, positionY) {
                   <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
                   <span class="checkmark"></span>
               </label>
-              <label class="container">
-                  <input class="radio-color" name="color" value="#C4C4C4" type="radio" />
-                  <span class="checkmark"></span>
-              </label>   
           </div>
       </button>
+      <button class="btnItalic"><span class="ti-trash"></span></button>
+
       </div>
       
       <div class="note_footer_checkmark hidden">
@@ -360,17 +302,40 @@ const Note = function (id, title, content, color, positionX, positionY) {
       <img src="/images/Loader.gif" width="70px" alt="">
   </div>
   </div>
-    `
-  }
-  function changeColor(newColor) {
-    this.color = newColor
-
-  }
+    `;
+    return elem;
 }
-
+axios.get(`http://localhost:3001/users/${userId}/notes`).then(response=>{
+  console.log(response.data.notes)
+  notes = response.data.notes;
+  window.localStorage.setItem('notes',JSON.stringify(notes))
+})
+function saveNote({title,content,color}){
+  axios.post(`http://localhost:3001/users/${userId}/notes`,{
+    title,
+    content,
+    color
+  },{withCredentials:true}).then(()=>{
+    console.log('success');
+  })
+}
+function loadNote(note){
+  var workspace = document.querySelector('.work-space')
+  let noteObject = new Note(note._id,note.title,note.content,note.color)
+  noteObjects.push(noteObject)
+  let noteElement = noteObject.getHTMLElement()
+  workspace.appendChild(noteElement)
+  bindRadioOnChangeEvent()
+  setBackGroundColor()
+}
+if (notes.length > 0) {
+  notes.forEach(note => {
+    loadNote(note)
+  })
+}
 function addNoteToList(note) {
-  storage.push(note)
-  window.localStorage.setItem('notes', storage)
+  notes.push(note)
+  window.localStorage.setItem('notes',JSON.stringify(notes))
 }
 function debounce(fn, ms) {
   let timer;
@@ -388,11 +353,12 @@ function doSomething(e) {
   console.log('done')
   console.log(e)
 }
-axios.get(`/users/${userId}/notes`).then(response=>{
-  console.log(response)
-})
+
 Array.from(document.getElementsByClassName('note_body')).forEach(elem => {
   elem.addEventListener('keyup', function(e) {
     debounceEvent(e)
   })
 })
+
+
+
