@@ -48,7 +48,7 @@ const login = async function (req, res, next) {
                     let userCookie = JSON.stringify({_id:user._id})
                     res.cookie('user',userCookie)
                     res.header('auth-token', token)
-                    return res.status(200).send(`Đăng nhập thành công!`)
+                    return res.status(200).json({message:"Đăng nhập thành công",user:{_id:user._id}})
                 }
             }
         } catch (err) {

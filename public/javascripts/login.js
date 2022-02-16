@@ -38,7 +38,8 @@ document.forms[0].addEventListener('submit',function(e){
             password: passwordElement.value
         },{withCredentials: true}).then(function(response){
             alert('Đăng nhập thành công')
-            localStorage.setItem('userId',response.data._id)
+            alert(response.data)
+            localStorage.setItem('userId',response.data.user._id)
             window.location.href='/home'
         }).catch(err=>{
             console.log(err.response)

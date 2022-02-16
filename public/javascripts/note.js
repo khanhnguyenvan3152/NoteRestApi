@@ -1,24 +1,12 @@
-function renderNotes(notes){
-    //get html of elements and add it to workspace
-}
-function addNote({}){
-    //call api
-}
-function deleteNote(id){
-    
-}
-function handleDeleteButton(e){
-    if(confirm('Do you want to delete this note?')){
-        deleteNote(e.target.id)
-    }
-}
-function updateNote(id,newtitle,newcontent,color){
-  //update in db and save to local
-  //call api 
-  //send back array
-  //save to local
-}
+import {addNote,deleteNote,loadNotes,onNewNote,updateNote} from "./socket.js";
+import {renderNotes,appendNote,handleAddClick} from "./ui.js";
 
-function getHtmlElem(note){
-  
-}
+const btnAdd = document.querySelector('#btnAdd')
+
+window.addEventListener('DOMContentLoaded',(e)=>{
+    loadNotes(renderNotes);
+    onNewNote(appendNote);
+})
+btnAdd.addEventListener('click',handleAddClick)
+
+handleUserInputEvent()

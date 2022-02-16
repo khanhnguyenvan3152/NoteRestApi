@@ -103,17 +103,25 @@
         </div>
     </div>
     <script src="/javascripts/script.js"></script>
-    <script>
+    <script type="module" src="/javascripts/note.js"></script>
+
+    <!-- <script>
+        let uid = window.localStorage.getItem('userId');
         let buttonAdd = document.querySelector('#btnAdd')
         const socket = io();
         socket.on('connect', () => {
             console.log("connected");
-
-            buttonAdd.addEventListener('click', function () {
-                socket.emit('savenote', { title: "lmao" })
+            socket.emit("client:getNotes",uid)
+            socket.on("server:sendNotes",function(notes){
+                console.log('Data received from socket')
+                console.log(notes)
             })
+            buttonAdd.addEventListener('click', function () {
+                socket.emit('savenote', { title: "",content:"",color:{light:"#C4C4C4",dark:"#D8D4D4"}})
+            })
+
         })
-    </script>
+    </script> -->
 </body>
 
 </html>

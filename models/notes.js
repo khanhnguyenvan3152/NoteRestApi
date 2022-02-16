@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Types = require('mongoose').Schema.Types
+const emitter = require('events').EventEmitter
 const NoteSchema = new mongoose.Schema({
     title: String,
     content: String,
