@@ -33,31 +33,8 @@ function setBackGroundColor() {
     elem.parentNode.childNodes[3].style.backgroundColor = elem.getAttribute('light')
   })
 }
-function handleRadioOnValueChange(e) {
-  //reset style for radio
-  let checkMarks = e.target.parentNode.parentNode.querySelectorAll('.checkmark')
-  checkMarks.forEach(checkMark => {
-    checkMark.style.border = 0
-  })
-  let dark = e.target.getAttribute('value');
-  let light = e.target.getAttribute('light')
-  e.target.parentNode.childNodes[3].style.border = '1px solid black'
-  let note = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-  let noteHeader = note.querySelector('.note_header')
-  let noteBody = note.querySelector('.note_body')
-  let noteFooter = note.querySelector('.note_footer')
-  noteHeader.style.backgroundColor = light;
-  noteBody.style.backgroundColor = dark;
-  noteFooter.style.backgroundColor = light;
-}
-function bindRadioOnChangeEvent() {
-  let radioElements = document.querySelectorAll('input[name="color"]')
-  radioElements.forEach(elem => {
-    elem.addEventListener('change', handleRadioOnValueChange)
-  })
-}
+
 setBackGroundColor()
-bindRadioOnChangeEvent()
 
 function addGlobalEventListener(type, selector, callback) {
   document.addEventListener(type, function (e) {

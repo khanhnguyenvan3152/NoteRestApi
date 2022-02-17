@@ -2,23 +2,47 @@ import { addNote, updateNote, deleteNote, loadNotes, onNewNote } from "./socket.
 
 const workspace = document.querySelector('.work-space')
 
+function handleRadioOnValueChange(e) {
+    //reset style for radio
+    let checkMarks = e.target.closest('.colorPalette').querySelectorAll('.checkmark')
+    checkMarks.forEach(checkMark => {
+        checkMark.style.border = 0
+    })
+    let dark = e.target.getAttribute('value');
+    let light = e.target.getAttribute('light')
+    e.target.parentNode.childNodes[3].style.border = '1px solid black'
+    let note = e.target.closest('.note');
+    let noteHeader = note.querySelector('.note_header')
+    let noteBody = note.querySelector('.note_body')
+    let noteFooter = note.querySelector('.note_footer')
+    noteHeader.style.backgroundColor = light;
+    noteBody.style.backgroundColor = dark;
+    noteFooter.style.backgroundColor = light;
+    
+    let id = note.getAttribute('id')
+    let title = note.querySelector('h3').innerText;
+    var content = note.querySelector('.note_body').innerText;
+    var color = {dark,light};
+    updateNote(id,title,content,color)
+}
+
 export function noteUI(note) {
     let elem = document.createElement('div')
     elem.setAttribute('id', note._id)
     elem.classList.add('note')
     elem.innerHTML = `
-    <div id="${note._id}_header"  class="note_header">
+    <div id="${note._id}_header" style="background-color:${note.color.dark}"  class="note_header">
       <div class="note_title">
-          <h3 contenteditable="">NOTE_TITLE</h3>
+          <h3 contenteditable="">${note.title}</h3>
       </div>
       <div id="${note._id}_menu" class="note_menu">
           <span class="ti-menu"></span>
       </div>
   </div>
-  <div class="note_body"  aria-multiline="true" contenteditable="">
-
+  <div class="note_body" style="background-color:${note.color.light}"  aria-multiline="true" contenteditable="">
+    ${note.content}
   </div>
-  <div  class="note_footer">
+  <div class="note_footer" style="background-color:${note.color.dark}">
       <div class="note_footer_tools">
           <button class="btnBold"><span class="ti-bold">B</span></button>
           <button class="btnUnderline"><span class="ti-underline"></span></button>
@@ -53,7 +77,7 @@ export function noteUI(note) {
 
       </div>
       
-      <div class="note_footer_checkmark hidden">
+      <div class="note_footer_checkmark hidden" >
           <span class="ti-check"></span>
       </div>
       <div class="note_footer_checkmark spinner hidden">
@@ -61,8 +85,19 @@ export function noteUI(note) {
   </div>
   </div>
     `;
-    const btnDelete = elem.querySelector('#btnDelete')
-    btnDelete.addEventListener('click', deleteNote(note._id))
+    var btnDelete = elem.querySelector('#btnDelete')
+    btnDelete.addEventListener('click', (e) => {
+        if (confirm('Are you sure to delete this note?')) {
+            deleteNote(note._id);
+            elem.remove()
+        }
+    })
+    var title = elem.querySelector('.note_header').innerText;
+    var content = elem.querySelector('.note_body').innerText;
+    var inputElements = elem.querySelectorAll('input[name="color"]')
+    inputElements.forEach(elem => {
+        elem.addEventListener('change',handleRadioOnValueChange)
+    })
     return elem;
 }
 
@@ -73,7 +108,6 @@ export function renderNotes(notes) {
         workspace.append(noteUI(note))
     });
     setBackGroundColor()
-    bindRadioOnChangeEvent()
 }
 
 export const appendNote = function (note) {
@@ -88,6 +122,6 @@ export const handleAddClick = function (e) {
     })
 }
 
-//style="background-color:${note.color.light}"
+//"
 //style="background-color:${note.color.light}"
 //style="background-color:${note.color.dark}"

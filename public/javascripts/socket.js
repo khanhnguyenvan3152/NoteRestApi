@@ -9,8 +9,8 @@ export function updateNote(id, title, content, color) {
     socket.emit('client:updateNote', { id, title, content, color })
 }
 
-export function deleteNote(id, uid) {
-    socket.emit('client:deleteNote', { id, uid })
+export function deleteNote(id) {
+    socket.emit('client:deleteNote', { uid,noteId:id })
 }
 
 export function getNotes(uid) {
@@ -27,3 +27,6 @@ export const loadNotes = (callback)=>{
     socket.on("server:sendNotes",callback)
 }
 
+export const onNoteDeleted = (callback)=>{
+    socket.on("server:noteDeleted",callback)
+}
