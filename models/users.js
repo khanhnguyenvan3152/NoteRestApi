@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
 const Types = require('mongoose').Schema.Types
 
 const UserSchema = new mongoose.Schema({
