@@ -108,6 +108,7 @@ export function noteUI(note) {
     inputElements.forEach(elem => {
         elem.addEventListener('change',handleRadioOnValueChange)
     })
+    setBackGroundColor()
     return elem;
 }
 
