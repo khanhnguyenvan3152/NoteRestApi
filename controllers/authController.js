@@ -53,6 +53,7 @@ const login = async function (req, res, next) {
             }
         } catch (err) {
             res.status(400).send(`Đã có lỗi xảy ra!`)
+            console.log(err);
         }
     }
 }

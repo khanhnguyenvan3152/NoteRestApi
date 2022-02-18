@@ -5,25 +5,9 @@ const getCookie = (name) => {
   }, '')
 }
 var storage = window.localStorage;
-var userId = JSON.parse(getCookie('user'))._id
+var userId = JSON.parse(getCookie('user'))._id || '';
 
 //Unhide effect on login password
-var unHideElement = document.querySelector('.login-form_password__unhide')
-var isHide = false;
-function handleUnHideClick(e) {
-  document.querySelector('.strike').classList.toggle('hidden');
-  if (isHide == true) {
-    isHide = false
-    document.querySelector("input[name='password']").setAttribute('type', 'text')
-  } else {
-    isHide = true
-    document.querySelector("input[name='password']").setAttribute('type', 'password')
-  }
-}
-if (unHideElement != null) {
-  unHideElement.onclick = handleUnHideClick
-}
-
 
 
 var btnAddElement = document.getElementById('btnAdd')

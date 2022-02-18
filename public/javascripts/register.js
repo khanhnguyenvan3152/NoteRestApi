@@ -59,14 +59,14 @@ document.forms[0].addEventListener('submit',function(e){
     let isEmailValid = checkEmail(emailElement)
     let isPasswordsEqual = checkConfirmationPassword(passwordElement,retypepasswordElement)
     if(!isEmptyError && isEmailValid && isPasswordsEqual){
-        axios.post('http://localhost:3000/users/register',{
+        axios.post('users/register',{
             email: emailElement.value,
             password: passwordElement.value,
             username: userNameElement.value
         }).then(function(response){
             alert(response.data)
         }).catch(err=>{
-            alert(err.response.data)
+            alert(err.response.data.details[0])
         })
     }
 

@@ -37,7 +37,6 @@ function handleKeyUp(e){
         dark: noteBody.style.backgroundColor 
     }
     updateNote(id,title,content,color)
-    console.log(e)
 }
 export function noteUI(note) {
     let elem = document.createElement('div')
@@ -113,7 +112,6 @@ export function noteUI(note) {
 }
 
 export function renderNotes(notes) {
-    console.log(notes)
     workspace.innerHTML = ""
     notes.forEach(note => {
         workspace.append(noteUI(note))
