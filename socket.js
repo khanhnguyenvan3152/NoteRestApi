@@ -5,21 +5,21 @@ module.exports = function (io) {
     io.on("connection", (socket) => {
         console.log("socket connected:", socket.id)
         socket.on('client:getNotes', async function (uid) {
-            console.log(uid)
             let notes = await getNote(uid)
             socket.emit("server:sendNotes", notes)
         })
         socket.on('client:addNote', async function (uid) {
             let note = await newNote(uid);
-            console.log(note)
             socket.emit('server:newNote', note)
         })
         socket.on('client:deleteNote', async function ( {uid, noteId} ) {
             await deleteNote(uid, noteId)
         })
         socket.on('client:updateNote',async function({id,title,content,color}){
-            console.log('update')
             await updateNote(id,title,content,color)
+        })
+        socket.on('disconnect',function(){
+            socket.removeAllListeners();
         })
     })
 
@@ -37,7 +37,6 @@ module.exports = function (io) {
             let user = await User.findById(uid)
             user.notes.push(note._id);
             await Promise.all([note.save(), user.save()])
-            console.log(user.notes)
             return note;
         } catch (err) {
             console.log(err)
@@ -63,7 +62,6 @@ module.exports = function (io) {
             note.content = content;
             note.color.dark = color.dark;
             note.color.light = color.light;
-            console.log(note);
             await note.save()
         }catch(err){
             console.log(err);

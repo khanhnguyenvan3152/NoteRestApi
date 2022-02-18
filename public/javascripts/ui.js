@@ -18,7 +18,6 @@ function handleRadioOnValueChange(e) {
     noteHeader.style.backgroundColor = light;
     noteBody.style.backgroundColor = dark;
     noteFooter.style.backgroundColor = light;
-    
     let id = note.getAttribute('id')
     let title = note.querySelector('h3').innerText;
     var content = note.querySelector('.note_body').innerText;
@@ -26,12 +25,26 @@ function handleRadioOnValueChange(e) {
     updateNote(id,title,content,color)
 }
 
+function handleKeyUp(e){
+    var note = e.target.closest('.note')
+    var noteHeader = note.querySelector('.note_header')
+    var noteBody = note.querySelector('.note_body')
+    var id = note.getAttribute('id')
+    var title = note.querySelector('h3').innerText;
+    var content = noteBody.innerHTML;
+    var color = {
+        light: noteHeader.style.backgroundColor,
+        dark: noteBody.style.backgroundColor 
+    }
+    updateNote(id,title,content,color)
+    console.log(e)
+}
 export function noteUI(note) {
     let elem = document.createElement('div')
     elem.setAttribute('id', note._id)
     elem.classList.add('note')
     elem.innerHTML = `
-    <div id="${note._id}_header" style="background-color:${note.color.dark}"  class="note_header">
+    <div id="${note._id}_header" style="background-color:${note.color.light}"  class="note_header">
       <div class="note_title">
           <h3 contenteditable="">${note.title}</h3>
       </div>
@@ -39,14 +52,12 @@ export function noteUI(note) {
           <span class="ti-menu"></span>
       </div>
   </div>
-  <div class="note_body" style="background-color:${note.color.light}"  aria-multiline="true" contenteditable="">
+  <div class="note_body" style="background-color:${note.color.dark}"  aria-multiline="true" contenteditable="">
     ${note.content}
   </div>
-  <div class="note_footer" style="background-color:${note.color.dark}">
+  <div class="note_footer" style="background-color:${note.color.light}">
       <div class="note_footer_tools">
-          <button class="btnBold"><span class="ti-bold">B</span></button>
-          <button class="btnUnderline"><span class="ti-underline"></span></button>
-          <button class="btnItalic"><span class="ti-Italic"></span></button>
+         
           <button id="btnColorPalette" class="btnColorPalette">
           <span class="ti-palette">
           </span>
@@ -85,6 +96,8 @@ export function noteUI(note) {
   </div>
   </div>
     `;
+    elem.querySelector('h3').addEventListener('keyup',keyUpListeners)
+    elem.querySelector('.note_body').addEventListener('keyup',keyUpListeners)
     var btnDelete = elem.querySelector('#btnDelete')
     btnDelete.addEventListener('click', (e) => {
         if (confirm('Are you sure to delete this note?')) {
@@ -92,8 +105,6 @@ export function noteUI(note) {
             elem.remove()
         }
     })
-    var title = elem.querySelector('.note_header').innerText;
-    var content = elem.querySelector('.note_body').innerText;
     var inputElements = elem.querySelectorAll('input[name="color"]')
     inputElements.forEach(elem => {
         elem.addEventListener('change',handleRadioOnValueChange)
@@ -110,16 +121,13 @@ export function renderNotes(notes) {
     setBackGroundColor()
 }
 
+const keyUpListeners = _.debounce(handleKeyUp,2000)
 export const appendNote = function (note) {
     workspace.append(noteUI(note))
-    setBackGroundColor()
-    bindRadioOnChangeEvent()
 }
 
 export const handleAddClick = function (e) {
-    addNote(function (newNote) {
-        appendNote(noteUI(newNote))
-    })
+    addNote()
 }
 
 //"
