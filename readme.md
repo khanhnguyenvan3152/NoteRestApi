@@ -1,5 +1,6 @@
 # Simple Note App on browser
 NoteAppSocketIO was build using NodeJS Express with realtime sync notes with SocketIO.
+
 **Install package:**
 
     npm install
