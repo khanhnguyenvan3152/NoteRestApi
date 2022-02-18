@@ -1,6 +1,6 @@
 const collection = require('../models/users')
 const noteCollection = require('../models/notes')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const salt = 12
 const mailer = require('../mailer');
 const notes = require('../models/notes');

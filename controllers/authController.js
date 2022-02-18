@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const Validator = require('../helpers/validation')
 const User = require('../models/users')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const register = async function (req, res, next) {
     console.log(req.body)
     const { error } = Validator.validateRegister(req.body)
