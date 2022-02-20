@@ -123,6 +123,7 @@ export function renderNotes(notes) {
 const keyUpListeners = _.debounce(handleKeyUp,2000)
 export const appendNote = function (note) {
     workspace.append(noteUI(note))
+    setBackGroundColor()
 }
 
 export const handleAddClick = function (e) {
